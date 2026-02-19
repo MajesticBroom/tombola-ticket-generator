@@ -1,10 +1,7 @@
 package com.mateuszgebka.tombola;
 
 import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class TicketGenerator {
 
@@ -28,7 +25,8 @@ public class TicketGenerator {
         List<Integer> randomColumns = generateRandomColumns();
         List<List<Integer>> rejectedFields = getFieldsToReject(randomColumns);
 
-        HashMap<Integer, List<Integer>> ticketData = new HashMap<>();
+        // Data to return
+        HashMap<Integer, Map<Integer, Integer>> ticketData = new HashMap<>();
 
         for (int i = 0; i < 9; i++) {
             if (randomColumns.contains(i)) {
@@ -42,8 +40,23 @@ public class TicketGenerator {
 
                 if (rejectedFieldsCounter < 3) {
                     Collections.shuffle(valuesInColumn, secureRandom);
-                    List<Integer> column = valuesInColumn.subList(0, 3 - rejectedFieldsCounter);
-                    ticketData.put(i, column);
+                    List<Integer> rows = new ArrayList<>(List.of(0, 1, 2));
+                    Collections.shuffle(rows, secureRandom);
+
+                    final int elementsInColumn = 3 - rejectedFieldsCounter;
+
+                    List<Integer> values = valuesInColumn.subList(0, elementsInColumn);
+                    rows = rows.subList(0, elementsInColumn);
+
+                    Map<Integer, Integer> valuesInRow = new HashMap<>();
+
+                    for (int j = 0; j < elementsInColumn; j++) {
+                        valuesInRow.put(rows.get(j), values.get(j));
+                    }
+
+
+
+                    ticketData.put(i, valuesInRow);
                 }
             }
         }

@@ -15,6 +15,23 @@ public class TicketGenerator {
         this.allValues = initializeAllValues();
     }
 
+    public Set<Ticket> getTicketsSet(int numOfTickets) {
+        Set<Ticket> ticketDb = new HashSet<>();
+
+        for (int i = 0; i < numOfTickets; i++) {
+            Ticket ticket = this.generateTicket();
+
+            while (ticketDb.contains(ticket)) {
+                System.out.println("This ticket already exists! Generating new...");
+                ticket = this.generateTicket();
+            }
+
+            ticketDb.add(ticket);
+        }
+
+        return ticketDb;
+    }
+
     /// Generate Tombola Ticket
     /// Rules of placing values:
     /// - exactly 15 different values on each ticket

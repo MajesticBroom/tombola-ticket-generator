@@ -5,9 +5,9 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Ticket {
-    private final Map<Integer, List<Integer>> columns;
+    private final Map<Integer, Map<Integer, Integer>> columns;
 
-    public Ticket(Map<Integer, List<Integer>> columns) {
+    public Ticket(Map<Integer, Map<Integer, Integer>> columns) {
         this.columns = columns;
     }
 
@@ -25,8 +25,13 @@ public class Ticket {
     }
 
     public void printTicket() {
-        for (List<Integer> col : columns.values()) {
-            System.out.println(col);
+        for (Map.Entry<Integer, Map<Integer, Integer>> col : columns.entrySet()) {
+            System.out.println("---");
+            System.out.println("Col " + col.getKey() + ":");
+
+            for (Map.Entry<Integer, Integer> row : col.getValue().entrySet()) {
+                System.out.println("\tRow " + row.getKey() + " -> " + row.getValue());
+            }
         }
     }
 

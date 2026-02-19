@@ -23,12 +23,12 @@ public class Main {
         }
 
         // Show tickets
-        // int i = 1;
-        // for (Ticket t : ticketDb) {
-        //     System.out.println("Ticket #" + i++);
-        //     t.printTicket();
-        //     System.out.println("----------");
-        // }
+        int i = 1;
+        for (Ticket t : ticketDb) {
+            System.out.println("Ticket #" + i++);
+            t.printTicket();
+            System.out.println("----------");
+        }
 
         long endTime = System.nanoTime();
         long duration = (endTime - startTime);

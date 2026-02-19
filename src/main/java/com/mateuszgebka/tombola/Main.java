@@ -17,19 +17,7 @@ public class Main {
                 long startTime = System.nanoTime();
                 TicketGenerator generator = new TicketGenerator();
 
-                // Set<Ticket> ticketDb = new HashSet<>();
                 Set<Ticket> ticketDb = generator.getTicketsSet(numOfTickets);
-
-                // for (int i = 0; i < numOfTickets; i++) {
-                //     Ticket ticket = generator.generateTicket();
-                //
-                //     while (ticketDb.contains(ticket)) {
-                //         System.out.println("This ticket already exists! Generating new...");
-                //         ticket = generator.generateTicket();
-                //     }
-                //
-                //     ticketDb.add(ticket);
-                // }
 
                 // Show tickets
                 int i = 1;

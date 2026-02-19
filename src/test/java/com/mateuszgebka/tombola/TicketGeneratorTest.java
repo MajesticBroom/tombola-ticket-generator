@@ -13,6 +13,6 @@ public class TicketGeneratorTest {
 
         Set<Ticket> ticketDb = generator.getTicketsSet(20);
 
-        assertEquals(20, ticketDb.size(), "Generator should produce exatly 20 tickets!");
+        assertEquals(20, ticketDb.size(), "Generator should produce exactly 20 tickets!");
     }
 }

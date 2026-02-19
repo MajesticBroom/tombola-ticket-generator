@@ -11,10 +11,6 @@ public class Ticket {
         this.columns = columns;
     }
 
-    public Map<Integer, List<Integer>> getColumns() {
-        return columns;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -32,5 +28,9 @@ public class Ticket {
         for (List<Integer> col : columns.values()) {
             System.out.println(col);
         }
+    }
+
+    public int getNumOfColumns() {
+        return this.columns.size();
     }
 }

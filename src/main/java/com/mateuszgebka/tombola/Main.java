@@ -34,6 +34,7 @@ public class Main {
                 int i = 1;
                 for (Ticket t : ticketDb) {
                     System.out.println("Ticket #" + i++);
+                    System.out.println("Columns count: " + t.getNumOfColumns());
                     t.printTicket();
                     System.out.println("----------");
                 }

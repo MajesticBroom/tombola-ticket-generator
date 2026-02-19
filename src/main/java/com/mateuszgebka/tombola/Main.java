@@ -1,40 +1,56 @@
 package com.mateuszgebka.tombola;
 
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 
 public class Main {
-    public static void main(String[] args) {
-        long startTime = System.nanoTime();
+    static void main() {
 
-        TicketGenerator generator = new TicketGenerator();
 
-        Set<Ticket> ticketDb = new HashSet<>();
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter number of tickets to generate: ");
+            int numOfTickets = scanner.nextInt();
 
-        for (int i = 0; i < 2_000_000; i++) {
-            Ticket ticket = generator.generateTicket();
+            if (numOfTickets > 0) {
+                long startTime = System.nanoTime();
+                TicketGenerator generator = new TicketGenerator();
 
-            while (ticketDb.contains(ticket)) {
-                System.out.println("This ticket already exists! Generating new...");
-                ticket = generator.generateTicket();
+                Set<Ticket> ticketDb = new HashSet<>();
+
+                for (int i = 0; i < numOfTickets; i++) {
+                    Ticket ticket = generator.generateTicket();
+
+                    while (ticketDb.contains(ticket)) {
+                        System.out.println("This ticket already exists! Generating new...");
+                        ticket = generator.generateTicket();
+                    }
+
+                    ticketDb.add(ticket);
+                }
+
+                // Show tickets
+                int i = 1;
+                for (Ticket t : ticketDb) {
+                    System.out.println("Ticket #" + i++);
+                    t.printTicket();
+                    System.out.println("----------");
+                }
+
+                long endTime = System.nanoTime();
+                long duration = (endTime - startTime);
+
+                System.out.println("Execution time:");
+                System.out.println(duration + " nanoseconds");
+                System.out.println(duration / 1_000_000 + " miliseconds");
+
+            } else {
+                System.out.println("Enter valid count of tickets.");
             }
-
-            ticketDb.add(ticket);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
 
-        // Show tickets
-        int i = 1;
-        for (Ticket t : ticketDb) {
-            System.out.println("Ticket #" + i++);
-            t.printTicket();
-            System.out.println("----------");
-        }
-
-        long endTime = System.nanoTime();
-        long duration = (endTime - startTime);
-
-        System.out.println("Execution time:");
-        System.out.println(duration + " nanoseconds");
-        System.out.println(duration / 1_000_000 + " miliseconds");
     }
 }
